@@ -1,6 +1,6 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import "./styles.css";
+import "./style.css";
 
 const data = {
   labels: [
