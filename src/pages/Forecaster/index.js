@@ -1,12 +1,13 @@
 import React from "react";
+import LineChart from "../../components/LineChart";
 
 const ForecasterHome = () => {
   return (
     <>
-       <div>
-            <h3>Investment Forecaster</h3>
-            <p>Logic goes here</p>
-          </div>
+      <div>
+        <h3>Investment Forecaster</h3>
+        <LineChart />
+      </div>
     </>
   );
 };
