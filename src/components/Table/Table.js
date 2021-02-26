@@ -3,7 +3,7 @@ import TableRow from '../../components/TableRow/TableRow.js';
 import Table from 'react-bootstrap/Table';
 import { useState } from 'react';
 
-const InputTable = props => {
+const InputTable = (props) => {
   const entries = props.entries;
   const [error_text, setErrorText] = useState('');
 
