@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import NumericInput from "react-numeric-input";
 
 const TableRow = (props) => {
-  const { updateAllocations } = props;
   const [alloc, setAlloc] = useState(props.allocation);
 
   return (
@@ -11,7 +10,7 @@ const TableRow = (props) => {
         <td>{props.id}</td>
         <td>{props.category}</td>
         <td>
-          <NumericInput
+          <NumericInput className="allocation"
             step={0.1}
             precision={2}
             min={0}
@@ -19,7 +18,6 @@ const TableRow = (props) => {
             value={alloc}
             onChange={(value) => {
               setAlloc(value);
-              updateAllocations(props.category, value);
             }}
           />
           %
