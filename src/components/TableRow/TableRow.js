@@ -3,14 +3,14 @@ import { useState } from 'react';
 import NumericInput from 'react-numeric-input';
 
 const TableRow = props => {
-  const [alloc, setAlloc] = useState(props.allocation);
+  const [alloc, setAlloc] = useState(0);
 
   return (
     <>
       <tr>
-        <td>{props.key}</td>
+        <td>{props.id}</td>
         <td>{props.category}</td>
-        <td><NumericInput step={0.1} precision={2} min={0} max={props.max} value={alloc}
+        <td><NumericInput className="allocation" step={0.1} precision={2} min={0} max={props.max} value={alloc}
           onChange={value => setAlloc(value)} />%</td>
         <td>{(alloc / 100 * 10000).toFixed(2)}</td>
       </tr>
