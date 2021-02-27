@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import NumericInput from "react-numeric-input";
 
 const TableRow = (props) => {
+  const dispatch = useDispatch();
   const [alloc, setAlloc] = useState(props.allocation);
 
   return (
@@ -18,6 +20,10 @@ const TableRow = (props) => {
             value={alloc}
             onChange={(value) => {
               setAlloc(value);
+              dispatch({
+                type: "UPDATE_ALLOCATION",
+                payload: { category: props.category, allocation: value },
+              });
             }}
           />
           %

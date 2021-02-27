@@ -70,7 +70,7 @@ const LineChart = (props) => {
       },
     },
   };
-
+  console.log("data: ", data);
   return (
     <div className="chart-div">
       <Line data={data} options={options} />
