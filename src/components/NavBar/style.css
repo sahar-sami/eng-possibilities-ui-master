@@ -1,0 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Alegreya&display=swap");
+
+.nav-bar {
+  background-color: #02025f;
+}
+
+.brand-name {
+  font-family: "Alegreya", serif;
+}
