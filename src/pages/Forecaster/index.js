@@ -39,7 +39,6 @@ const ForecasterHome = () => {
   const checkValid = (allocations) => {
     var sum = 0;
     var i = 0
-    console.log("Category Data: ", categoryData)
     for (const [category, allocation] of Object.entries(allocations)) {
       if (allocation < categoryData[i].minimum) {
         var text = "Your allocation for "
@@ -52,11 +51,8 @@ const ForecasterHome = () => {
       sum += allocation;
       i += 1
     }
-    if (sum < 100) {
-      setErrorText("Total percent is less than 100. Please edit allocations.");
-    }
-    else if (sum > 100) {
-      setErrorText("Total percent is greater than 100. Please edit allocations.");
+    if (sum !== 100) {
+      setErrorText("Total percent is " + sum + "%. Please edit your allocations.");
     }
     else {
       setErrorText("");
@@ -65,16 +61,17 @@ const ForecasterHome = () => {
   }
 
   const checkAllocations = () => {
+    console.log(allocations)
+    const request = { "request": allocations };
 
     async function updateAllocations() {
       const response = await fetch("http://localhost:8080/api/v1/forecast", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json;charset=UTF-8",
+          "Content-Type": "application/json;",
           "Access-Control-Allow-Origin": "http://localhost:3000",
-          // body: JSON.stringify(allocations),
-          body: allocations,
         },
+        body: JSON.stringify(request)
       });
 
       const data = await response.json();
