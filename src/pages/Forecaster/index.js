@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LineChart from "../../components/LineChart";
 import InputTable from "../../components/Table/Table.js";
 import Table from "react-bootstrap/Table";
+import { withRouter } from "react-router-dom";
 
 const ForecasterHome = () => {
   const dispatch = useDispatch();
@@ -74,6 +75,15 @@ const ForecasterHome = () => {
       const data = await response.json();
 
       setInvestmentGrowth(data["response"]);
+      var new_forecast = { "allocations": allocations, "growth": data["response"] }
+      if (localStorage.past_forecasts) {
+        var current_history = JSON.parse(localStorage.getItem("past_forecasts"));
+        current_history = current_history + [new_forecast];
+        localStorage.setItem("past_forecasts", JSON.stringify(current_history));
+      }
+      else {
+        localStorage.setItem("past_forecasts", JSON.stringify([new_forecast]));
+      }
     }
 
     updateAllocations();
@@ -127,4 +137,4 @@ const ForecasterHome = () => {
   );
 };
 
-export default ForecasterHome;
+export default withRouter(ForecasterHome);
