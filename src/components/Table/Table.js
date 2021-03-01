@@ -20,7 +20,7 @@ const InputTable = () => {
 
   return (
     <>
-      <Table>
+      <Table striped style={{ marginTop: "10px", marginBottom: "0px" }}>
         <thead>
           <tr>
             <th>#</th>

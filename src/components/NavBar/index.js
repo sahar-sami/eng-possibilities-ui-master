@@ -1,12 +1,25 @@
 import React from "react";
 
 import { Navbar, Nav } from "react-bootstrap";
+import "./style.css";
 
 const NavBar = () => {
   return (
     <>
-      <Navbar bg="light">
-        <Navbar.Brand href="#">DePo</Navbar.Brand>
+      <Navbar
+        // override default padding
+        style={{ padding: "10px 40px" }}
+        className="nav-bar"
+        variant="dark"
+      >
+        <Navbar.Brand
+          // override default font size
+          style={{ fontSize: "22px" }}
+          className="brand-name"
+          href="#"
+        >
+          DePo
+        </Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
         </Nav>

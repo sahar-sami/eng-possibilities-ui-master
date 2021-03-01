@@ -21,8 +21,9 @@ const LineChart = (props) => {
         label: "Investment Growth",
         data: props.investmentGrowth,
         fill: false,
-        backgroundColor: "rgb(255, 99, 132)",
-        borderColor: "rgba(255, 99, 132, 0.2)",
+        backgroundColor: "rgb(13, 11, 249)",
+        borderColor: "rgb(13, 11, 249, 0.2)",
+        borderWidth: 2,
         // to draw a straight line
         lineTension: 0,
       },
@@ -70,7 +71,7 @@ const LineChart = (props) => {
       },
     },
   };
-  console.log("data: ", data);
+
   return (
     <div className="chart-div">
       <Line data={data} options={options} />

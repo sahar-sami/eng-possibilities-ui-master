@@ -6,6 +6,7 @@ const allocationsReducer = (state = initialState, action) => {
   if (type === "LOAD_ALLOCATIONS") {
     // initialize allocations with default value 0, in 2 d.p.
     const newState = payload.categories.reduce(
+      // eslint-disable-next-line
       (obj, item) => ((obj[item.category] = item.minimum), obj),
       {}
     );

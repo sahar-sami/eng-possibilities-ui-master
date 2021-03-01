@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LineChart from "../../components/LineChart";
 import InputTable from "../../components/Table/Table.js";
 import Table from "react-bootstrap/Table";
+import "./style.css";
 
 const ForecasterHome = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const ForecasterHome = () => {
 
   const checkValid = (allocations) => {
     var sum = 0;
-    var i = 0
+    var i = 0;
     for (const [category, allocation] of Object.entries(allocations)) {
       if (allocation < categoryData[i].minimum) {
         let text = `Your allocation for ${category} is less than the minimum of ${categoryData[i].minimum}%.`;
@@ -49,17 +50,18 @@ const ForecasterHome = () => {
       i += 1;
     }
     if (sum !== 100) {
-      setErrorText("Total percent is " + sum + "%. Please edit your allocations.");
-    }
-    else {
+      setErrorText(
+        "Total percent is " + sum + "%. Please edit your allocations."
+      );
+    } else {
       setErrorText("");
       checkAllocations();
     }
   };
 
   const checkAllocations = () => {
-    console.log(allocations)
-    const request = { "request": allocations };
+    console.log(allocations);
+    const request = { request: allocations };
 
     async function updateAllocations() {
       const response = await fetch("http://localhost:8080/api/v1/forecast", {
@@ -68,7 +70,7 @@ const ForecasterHome = () => {
           "Content-Type": "application/json;",
           "Access-Control-Allow-Origin": "http://localhost:3000",
         },
-        body: JSON.stringify(request)
+        body: JSON.stringify(request),
       });
 
       const data = await response.json();
@@ -91,7 +93,7 @@ const ForecasterHome = () => {
 
   return (
     <>
-      <div>
+      <div className="forecaster-div">
         <h3>Investment Forecaster</h3>
         <p>
           This page allows you to customize your investments and view the
@@ -109,9 +111,7 @@ const ForecasterHome = () => {
                   Update Forecast
                 </Button>
               </th>
-              <th>
-                <p>{errorText}</p>
-              </th>
+              <th style={{ verticalAlign: "middle" }}>{errorText}</th>
               <th
                 style={{
                   textAlign: "right",
