@@ -12,11 +12,12 @@ const TableRow = (props) => {
         <td>{props.id}</td>
         <td>{props.category}</td>
         <td>
-          <NumericInput className="allocation"
+          <NumericInput
+            className="allocation"
             step={0.1}
             precision={2}
             min={0}
-            max={props.max}
+            max={100}
             value={alloc}
             onChange={(value) => {
               setAlloc(value);

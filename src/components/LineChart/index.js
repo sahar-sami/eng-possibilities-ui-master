@@ -40,7 +40,7 @@ const LineChart = (props) => {
             labelString: "Amount",
           },
           ticks: {
-            // Include a dollar sign in the ticks
+            // include a dollar sign in the ticks
             callback: function (value, index, values) {
               return "$" + value;
             },
