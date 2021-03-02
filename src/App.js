@@ -4,6 +4,8 @@ import NavBar from "./components/NavBar";
 import ForecasterHome from "./pages/Forecaster";
 import PastForecasts from "./pages/PastForecasts";
 import { BrowserRouter, Switch, withRouter, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./App.css";
 

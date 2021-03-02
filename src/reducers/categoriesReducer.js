@@ -5,7 +5,7 @@ const categoriesReducer = (state = initialState, action) => {
 
   if (type === "LOAD_CATEGORIES") {
     const newState = payload.categories.map((category) => {
-      category.minimum = parseInt(category.minimum);
+      category.minimum = parseFloat(category.minimum);
       return category;
     });
     console.log("LOAD_CATEGORIES", newState);
