@@ -4,7 +4,7 @@ import TableRow from "../../components/TableRow/TableRow.js";
 import Table from "react-bootstrap/Table";
 import { Button } from "react-bootstrap";
 
-const InputTable = props => {
+const InputTable = (props) => {
   const entries = useSelector((state) => state.categories);
 
   let rows = [];

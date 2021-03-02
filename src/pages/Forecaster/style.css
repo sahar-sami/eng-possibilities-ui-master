@@ -1,3 +1,9 @@
 .forecaster-div {
-  padding: 10px 24px 0px 24px;
+  padding: 10px 40px 0px 40px;
+}
+
+.button-flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

@@ -3,7 +3,6 @@ import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import LineChart from "../../components/LineChart";
 import InputTable from "../../components/Table/Table.js";
-import Table from "react-bootstrap/Table";
 import { withRouter } from "react-router-dom";
 import "./style.css";
 
@@ -34,12 +33,10 @@ const ForecasterHome = () => {
         type: "LOAD_ALLOCATIONS",
         payload: { categories: data },
       });
-      console.log(data.map((data, index) => { return data }));
     }
 
     fetchData();
   }, [dispatch]);
-
 
   const checkValid = (allocations) => {
     var sum = 0;
@@ -66,6 +63,7 @@ const ForecasterHome = () => {
   const checkAllocations = () => {
     const request = { request: allocations };
 
+    // to make sure the graph reflects new forecasted investment growth
     async function updateAllocations() {
       const response = await fetch("http://localhost:8080/api/v1/forecast", {
         method: "POST",
@@ -78,13 +76,16 @@ const ForecasterHome = () => {
 
       const data = await response.json();
       setInvestmentGrowth(data["response"]);
-      var new_forecast = { "allocations": allocations, "growth": data["response"] }
+
+      // update forecast history
+      var new_forecast = { allocations: allocations, growth: data["response"] };
       if (localStorage.past_forecasts) {
-        var current_history = JSON.parse(localStorage.getItem("past_forecasts"));
+        var current_history = JSON.parse(
+          localStorage.getItem("past_forecasts")
+        );
         current_history = current_history.concat([new_forecast]);
         localStorage.setItem("past_forecasts", JSON.stringify(current_history));
-      }
-      else {
+      } else {
         localStorage.setItem("past_forecasts", JSON.stringify([new_forecast]));
       }
       console.log(localStorage.getItem("past_forecasts"));
@@ -95,8 +96,8 @@ const ForecasterHome = () => {
   };
 
   const resetAllocations = () => {
-    window.location.reload()
-  }
+    window.location.reload();
+  };
 
   const getOptimalAllocations = () => {
     async function optimalAllocations() {
@@ -105,7 +106,7 @@ const ForecasterHome = () => {
         headers: {
           "Content-Type": "application/json;",
           "Access-Control-Allow-Origin": "http://localhost:3000",
-        }
+        },
       });
 
       const data = await response.json();
@@ -116,20 +117,22 @@ const ForecasterHome = () => {
       var displayText = "Optimal Forecast Added! ";
       for (const category of categories) {
         displayText += category + ": " + optimalAllocs[category] + "% ";
-      } setOptimalDisplay(displayText);
-      var new_forecast = { "allocations": optimalAllocs, "growth": growth }
+      }
+      setOptimalDisplay(displayText);
+      var new_forecast = { allocations: optimalAllocs, growth: growth };
       if (localStorage.past_forecasts) {
-        var current_history = JSON.parse(localStorage.getItem("past_forecasts"));
+        var current_history = JSON.parse(
+          localStorage.getItem("past_forecasts")
+        );
         current_history = current_history.concat([new_forecast]);
         localStorage.setItem("past_forecasts", JSON.stringify(current_history));
-      }
-      else {
+      } else {
         localStorage.setItem("past_forecasts", JSON.stringify([new_forecast]));
       }
       setInvestmentGrowth(growth);
     }
     optimalAllocations();
-  }
+  };
 
   return (
     <>
@@ -142,15 +145,24 @@ const ForecasterHome = () => {
 
         <LineChart investmentGrowth={investmentGrowth} />
 
-        <InputTable entries={categoryData} resetAllocations={resetAllocations} />
-        <div style={{ display: 'inline-block', width: '100%' }}>
-          <Button onClick={() => checkValid(allocations)}>Update Forecast</Button>
-          <p>{errorText}</p></div>
-        <div style={{ display: 'inline-block', width: '100%' }}>
+        <InputTable
+          entries={categoryData}
+          resetAllocations={resetAllocations}
+        />
+        <div className="button-flex-container">
+          <div>
+            <Button onClick={() => checkValid(allocations)}>
+              Update Forecast
+            </Button>
+            <p>{errorText}</p>
+          </div>
+          <div>
+            <Button onClick={() => resetAllocations()}>Reset</Button>
+          </div>
+        </div>
+        <div>
           <Button onClick={() => getOptimalAllocations()}>Optimize</Button>
-          <p>{optimalDisplay}</p></div>
-        <div style={{ display: 'inline-block', float: 'right', width: '100%' }}>
-          <Button onClick={() => resetAllocations()}>Reset</Button>
+          <p>{optimalDisplay}</p>
         </div>
       </div>
     </>

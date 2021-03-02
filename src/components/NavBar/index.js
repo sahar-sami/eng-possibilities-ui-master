@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, BrowserRouter } from "react-router-dom";
 
 import { Navbar, Nav } from "react-bootstrap";
 import "./style.css";
 
 const NavBar = () => {
+  const [popupActive, setPopupActive] = useState(false);
+  // popup refers to help text
+  const togglePopup = () => {
+    setPopupActive(!popupActive);
+  };
+
   return (
     <>
       <BrowserRouter>
@@ -21,16 +27,24 @@ const NavBar = () => {
             href="#"
           >
             DePo
-        </Navbar.Brand>
+          </Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="/">Forecast an Investment</Nav.Link>
-          </Nav>
-          <Nav>
             <Nav.Link href="/PastForecasts">Past Forecasts</Nav.Link>
+          </Nav>
+          <Nav className="popup" onClick={togglePopup}>
+            <Nav.Link>Help</Nav.Link>
+            <span
+              className={`popup-text ${popupActive ? "show" : null}`}
+              id="my-popup"
+            >
+              <b>Note:</b> The graph will not be visible until you allocate a
+              total of 100% across all categories and click on the "Update
+              Forecast" button.
+            </span>
           </Nav>
         </Navbar>
       </BrowserRouter>
-
     </>
   );
 };
