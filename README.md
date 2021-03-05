@@ -1,6 +1,8 @@
 # Welcome to Deep Pockets (DePo)
 
-This project contains the codebase for user interface which you will complete. Once finished, you application should allow investors to allocate various amounts of money, and view the potential growth of their entire portfolio based on their allocations.  
+This application allows investors to allocate various amounts of money, and view the potential growth of their entire portfolio based on their allocations.  
+
+Link to backend: https://github.com/sahar-sami/eng-possibilities-svcs-master
 
 ## Prerequsites
 - NodeJS (version 10.0.0 or greater) 
